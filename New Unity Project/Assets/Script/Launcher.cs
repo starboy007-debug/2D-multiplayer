@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Chat;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Launcher : MonoBehaviour
+public class Launcher : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject connectedScreen;
+    public GameObject disconnectedScreen;
+    public void OnClick_ConnectBtn()
     {
-        
+        PhotonNetwork.ConnectUsingSettings();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnConnectedToMaster()
     {
-        
+        connectedScreen.SetActive(true);
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        disconnectedScreen.SetActive(true);
+    }
+
+    public override void OnJoinedLobby()
+    {
+        if (disconnectedScreen.activeSelf)
+            disconnectedScreen.SetActive(false);
+        connectedScreen.SetActive(true);
+    }
+
 }
