@@ -22,6 +22,7 @@ public class UIhandler : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         print("Room joined sucessfully");
+        PhotonNetwork.LoadLevel(1);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
