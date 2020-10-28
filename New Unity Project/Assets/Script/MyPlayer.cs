@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 public class MyPlayer : MonoBehaviourPun, IPunObservable
 {
 
@@ -16,6 +17,7 @@ public class MyPlayer : MonoBehaviourPun, IPunObservable
     public GameObject playerCamera;
 
     public SpriteRenderer sr;
+    public Text nameText;
     private Rigidbody2D rb;
     private bool IsGrounded;
 
@@ -25,11 +27,16 @@ public class MyPlayer : MonoBehaviourPun, IPunObservable
       //  PhotonNetwork.SerializationRate = 15;
         if (photonView.IsMine)
         {
+            nameText.text = PhotonNetwork.NickName;
             rb = GetComponent<Rigidbody2D>();
             playerCamera = GameObject.Find("Main Camera");
 
             sceneCamera.SetActive(false);
             playerCamera.SetActive(true);
+        }
+        else
+        {
+            nameText.text = pv.Owner.NickName;
         }
     }
     private void Update()

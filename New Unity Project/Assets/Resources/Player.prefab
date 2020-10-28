@@ -452,6 +452,7 @@ MonoBehaviour:
   jumpforce: 800
   playerCamera: {fileID: 1652301067222555105}
   sr: {fileID: 3509650123976359101}
+  nameText: {fileID: 3509650123914888713}
 --- !u!114 &6891631199230184355
 MonoBehaviour:
   m_ObjectHideFlags: 0
